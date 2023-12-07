@@ -1,7 +1,5 @@
-
 function getComputerChoice() {
 
-    let choice;
     let num = Math.floor(Math.random()* 3) + 1
     switch(num) {
         case 1:
@@ -53,9 +51,29 @@ function playRound(playerSelection, computerSelection)  {
         }
     }
 }
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
 
-function game() {
-    for (let i=0; i<5; i++) {
-        console.log(playRound(prompt("Your Choice:"), getComputerChoice()));
-    }
-}
+    // and for each one we add a 'click' listener
+    button.addEventListener('click', () => {
+
+        let id = button.id;
+        let choice = '';
+        const container = document.querySelector(".games-container")
+
+        switch(id) {
+            case '1':
+                choice = 'rock'
+            case '2':
+                choice = 'paper'
+            case '3':
+                choice = 'scissors'
+        }
+
+        let result = playRound(choice, getComputerChoice())
+        let result_text = document.createElement('h3')
+        result_text.textContent = 'Result: ' + String(result)
+        container.appendChild(result_text)
+
+    });
+  });
